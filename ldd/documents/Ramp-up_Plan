@@ -1,0 +1,114 @@
+Linux Device Driver No.Of.Days
+
+Session 1 		2
+Session 2 		3 
+Session 3 		3
+Session 4 		3
+Session 5 		2
+Session 6 		3
+Session 7 		3
+
+Total: 19 Days
+
+1. Writing your “first” Driver "Hello World"
+
+Introduction & The First Driver
+Linux Driver Ecosystem
+The Linux version 4.4.0-127-generic Source Organization
+Driver Development Environment
+
+2. Writing various Character Drivers
+
+a. Null Driver
+b. Memory Based Driver
+c. UART (Hardware) Based Driver
+
+2.1 Character Drivers:
+
+i. Major & Minor Numbers
+ii. Registering & Unregistering
+iii. Device Files & Device Classes
+iv. File Operations & its related Kernel Data Structures
+v. Special Focus on open, release, read, write, ioctl  
+vi. Memory Access in Kernel Space
+
+2.2 Hardware Access Mechanisms:
+
+i. System Memory
+ii. Device Memory
+iii. I/O Ports
+
+2.3 Debugging:
+
+i. Kernel & Driver Debugging Options & Techniques
+ii. Ways to Deal with Concurrency
+iii. Time Keeping, Delays, and the Timers in Kernel
+
+2.4 Interrupts:
+
+i. IRQs & their Registration
+ii. IRQ Handling & Control
+iii. Soft IRQs
+iv. Top & Bottom Halves
+
+3. Writing a USB Driver
+
+i. Understanding the USB Ecosystem
+ii. Walk through of Procfs & Sysfs in relation of USB
+iii. Understanding the USB Device entries
+iv. Interfacing with the USB Core
+v. USB Driver & Device Registration
+vi. Hot-plug-ability: probe and disconnect
+vii. Bulk Transfers & Various System Calls
+viii. USB to Serial Device (Hardware) Driver
+
+3.1 USB Drivers:
+
+i. USB Device Layout
+ii. USB Driver Layout
+iii. USB Core & Sysfs
+iv. USB Driver Registration  
+v. USB Device Hot-plug-ability
+vi. URB & its Operations
+vii. Special Focus on Control & Bulk Transfers
+
+4. Writing a File System Module (FSM)
+
+i. Memory Based File's Data & Meta Data in our FSM
+ii. Mounting over a Pseudo Device
+iii. Interfacing with the VFS
+iv. Filling the Super Block
+v. Creating the Directory Entry & Inode
+vi. Performing the operations: ls, cd, stat, sync etc.
+
+4.1 Block Drivers
+
+i. Driver Registration
+ii. Disk Drive Registration
+iii. Block Device Operations & its related Kernel DS
+iv. Request Queues & their Processing
+
+4.2 File System Modules:
+
+i. Virtual File System (VFS) Interfaces
+ii. VFS Internals
+iii. File System Registration & Operations
+iv. Super Block Operations
+v. Inode Operations
+vi. Address Space Operations
+vii. File Operations
+
+5. Pseudo File System Driver
+
+6. PCI Driver
+i. PCI Interface
+ii. PCI Configuration Space
+iii. PCI Driver Registration
+iv. PCI Device Access & Operations
+v. The Driver specific Commands & Tools
+vi. Setting up the Driver Development Environment
+vii. Understanding Kernel's Build System
+viii. Writing your Makefile
+
+7. Write Loopback network Driver
+

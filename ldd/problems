@@ -1,0 +1,16 @@
+Characteristics of Device Driver:
+
+1>
+The Linux kernel device drivers are shared
+library of privileged, memory resident, low
+level hardware handling routines.
+
+2>
+Device drivers provide a standard interface
+to the Linux kernel. Driver provides both file
+I/O and buffer cache interfaces to the
+kernel.
+difference between I/O interface and buffer cache interface
+
+problem with Module_process state
+	for_each process is not defined

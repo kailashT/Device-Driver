@@ -1,0 +1,41 @@
+1.Comile file by write Makefile in same folder:
+        make
+  see the output :
+        ls
+
+output : ****************************************************************
+	 *
+hello.c  hello.ko  hello.mod.c  hello.mod.o  hello.o  Makefile  modules.order  Module.symvers  README.md
+	 *
+	 ***************************************************************
+2.Insert module : 
+	sudo insmod hello.ko
+   See the output :
+	dmesg | tail -3
+
+output : ****************************************************************
+	 *
+[ 4081.758644] hello: loading out-of-tree module taints kernel.
+[ 4081.759094] Hello World
+[ 4081.759095] File : /home/spanidea-09/Desktop/1_helloMod/hello.c, function : hello_init, line : 55
+	 *
+	 ***************************************************************
+3. See the modules that get inserted:
+	cat /proc/modules | grep hello
+
+output : **************************************************************
+	 *  hello 16384 0 - Live 0x00000000 (OE)
+	 **************************************************************
+
+4. Remove module
+	sudo rmmod hello
+   See the output :
+	dmesg | tail -3
+
+output : **************************************************************
+	 *
+	 [ 4081.759095] File : /home/spanidea-09/Desktop/1_helloMod/hello.c, function : hello_init, line : 55
+[ 4556.553937] Exiting ...
+[ 4556.553939] File : /home/spanidea-09/Desktop/1_helloMod/hello.c, function : hello_exit, line : 68
+	 *
+	 **************************************************************

@@ -1,0 +1,179 @@
+Question for Preperation
+	Device Driver:
+
+		Basic:
+
+			What is linux architecture?
+				User space ?
+				Kernel space ?
+				Hardware ?
+			What is device driver ?
+			Types of device drivers ?
+			Character device driver ?
+			Block device driver ?
+			Network device driver ?
+			Difference between User application and Device Driver?
+			HelloWorld Device Driver:
+				Header Files
+				kernel functions
+			Makefile
+			Compiling process
+			loading
+			unloading
+	
+		Parameter Passing:
+			header file /linux/moduleparam.h
+			parameter macros
+				module_param()
+				module_param_array()
+				module_param_cb()
+		
+Character Device Driver:
+	Flow of data for drivers
+			user application
+			device file or device node
+			Major number & Minor Number
+			Device Driver
+			Hardware
+	Allocate major and minor no:
+		Dynamic Method
+			int alloc_chrdev_region(dev_t *dev, unsigned int firstminor, unsigned int count, char *name);
+		static method
+			int register_chrdev_region(dev_t first, unsigned int count, char *name);
+		(difference in system call)
+Device File creation:
+	Device Files ?
+		ls -l /dev/			
+	Creating Device File:
+		Manually:
+			mknod -m <permissions> <name> <device type> <major> <minor>
+		Automatic:			
+			linux/device.h and linux/kdev_t.h
+			create Class
+				struct class * class_create (struct module *owner, const char *name);
+			Create device:
+				struct device *device_create (struct *class, struct device *parent, dev_t dev, const char *fmt, ...);
+			Destroy Device;
+				void device_destroy (struct class * class, dev_t devt);
+Using Device File:
+	In linux kernel struct inode structure is used to represent files.
+	The inode structure contains a great deal of information about the file.
+	struct cdev is one of the elements of the inode structure. 
+	The struct cdev is the kernel’s internal structure that represents char devices.
+	struct Inode
+		{
+			struct cdev	
+			{ 
+			    struct kobject kobj; 
+			    struct module *owner; 
+			    const struct file_operations *ops; 
+			    struct list_head list; 
+			    dev_t dev; 
+			    unsigned int count; 
+			};
+		};
+
+		in cdev structure. Here we need to fill two fields,
+			file_operation (This we will see after this cdev structure)(mapping)
+			owner (This should be THIS_MODULE)
+
+		void cdev_init(struct cdev *cdev, struct file_operations *fops);
+		int cdev_add(struct cdev *dev, dev_t num, unsigned int count);
+		void cdev_del(struct cdev *dev);
+		
+	static struct file_operations fops =
+		{
+			.owner          = THIS_MODULE,
+			.read           = etx_read,
+			.write          = etx_write,
+			.open           = etx_open,
+			.release        = etx_release,
+		};
+
+
+Conclusion :
+	struct cdev & device file has nothing to do with each other
+	it is driver who map functions with the hepl of cdev
+
+Real device Driver;
+	User Space application (User program)
+	Kernel Space program (Driver)
+	
+	Open driver
+		allocate memory in kernel
+	Write Driver
+		copy_from_user
+		Write() in application
+	Read Driver
+		Copy_to_user
+		read() in application
+	Close Driver
+		free memory in kernel
+
+	#include <linux/slab.h>
+	kmalloc()
+		void *kmalloc(size_t size, gfp_t flags);
+	kfree()
+		void kfree(const void *objp)
+	copy_from_user()
+		unsigned long copy_from_user(void *to, const void __user *from, unsigned long  n);
+	copy_to_user()
+		unsigned long copy_to_user(const void __user *to, const void *from, unsigned long  n);
+
+IOCTL :
+	There are many ways to Communicate between the User space and Kernel Space, they are:
+		IOCTL
+		Procfs
+		Sysfs
+		Configfs
+		Debugfs
+		Sysctl
+		UDP Sockets
+		Netlink Sockets
+
+	Input and Output Control
+	The major use of this is in case of handling some specific operations of a device for which the kernel does not have a system call by default.
+	
+	linux/ioctl.h
+	Steps involved in IOCTL
+
+		Create IOCTL command in driver
+		Write IOCTL function in driver
+		Create IOCTL command in User space application
+		Use IOCTL system call in User space	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

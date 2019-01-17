@@ -1,0 +1,20 @@
+
+Character Device Driver
+
+Structures
+
+1.	dev_t
+
+2. 	struct inode
+		struct cdev
+			kernel internal structure to represent character device
+
+struct cdev { 
+    struct kobject kobj; 
+    struct module *owner; 
+    const struct file_operations *ops; 
+    struct list_head list; 
+    dev_t dev; 
+    unsigned int count; 
+};
+
